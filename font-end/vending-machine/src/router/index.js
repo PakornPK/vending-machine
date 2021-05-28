@@ -5,6 +5,7 @@ import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import BuyItems from "../views/BuyItems.vue";
 import Admin from "../views/Admin.vue";
+import FillProducts from "../views/FillProducts.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/buyitems/:mc",
     name: "BuyItems",
     component: BuyItems,
+  },
+  {
+    path: "/fillproduct/:mc",
+    name: "FillProducts",
+    component: FillProducts,
   },
   {
     path: "/admin",

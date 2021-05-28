@@ -71,6 +71,14 @@ export default {
   components: {
     Product,
   },
+  mounted(){ 
+    this.welcome()
+  },
+  methods: { 
+    welcome(){
+      alert("Test")
+    },
+  }, 
   data() {
     return {
       srcProduct: [
