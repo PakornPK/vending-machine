@@ -22,12 +22,12 @@
           selector="3"
         />
       </v-col>
-      
     </v-row>
   </v-container>
 </template>
 
 <script>
+import axios from "axios"
 import Machine from "@/components/machines/machine";
 export default {
   name: "Home",
@@ -35,24 +35,19 @@ export default {
   components: {
     Machine,
   },
+  methods : {
+    getMachines(){
+      axios.get("http://127.0.0.1:5000/api/v1/machine").then(response => {
+        this.machine = response.data
+      })
+    },
+  },
+  mounted() {
+    this.getMachines()
+  },
   data() {
     return {
-      machine: [
-        {
-          location: "หน้าโรงงาน",
-          src:
-            "https://www.scg.com/images/th/05sustainability_development/develop/env2.jpg",
-        },
-        {
-          location: "หน้าโรงเรียน",
-          src: "http://teen.mthai.com/app/uploads/2015/12/bbpschool-okkk.jpg",
-        },
-        {
-          location: "หน้าโรงพยบาล",
-          src:
-            "https://ww2.bangkokhospital.com/assets/theme/bangkok/assets/images/corparate/thumb_xs.jpg",
-        },
-      ],
+      machine: [],
     };
   },
 };

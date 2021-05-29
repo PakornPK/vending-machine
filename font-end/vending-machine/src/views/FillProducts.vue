@@ -32,8 +32,19 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "admin",
+  mounted() { 
+    this.getData()
+  },
+  methods: { 
+    getData(){
+      axios.get("http://127.0.0.1:5000/api/v1/fillproduct").then(response => {
+        this.products = response.data
+      })
+    }
+  },
   data() {
     return {
       headers: [
@@ -50,72 +61,7 @@ export default {
         { text: "ต้องเติมสินค้า", value: "reload" },
         { text: "เติมสินค้า", value: "fill" },
       ],
-      products: [
-        {
-          id: 1,
-          name: "นกพิราบผักกาดดองเค็มฝาดึง 230 กรัม",
-          categorie: "อาหารกระป๋อง",
-          price: "฿32.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 2,
-          name: "ซีเล็คทูน่าสเต็กในน้ำเกลือ 165 กรัม",
-          categorie: "อาหารกระป๋อง",
-          price: "฿49.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 3,
-          name: "อะยัมซาร์ดีนในซอสมะเขือเทศ 155 กรัม",
-          categorie: "อาหารกระป๋อง",
-          price: "฿36.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 4,
-          name: "ยูเอฟซี เงาะในน้ำเชื่อม 565 กรัม",
-          categorie: "อาหารกระป๋อง",
-          price: "฿82.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 5,
-          name: "เอ็ม-150 150 มิลลิลิตร",
-          categorie: "เครื่องดื่ม",
-          price: "฿10.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 6,
-          name: "สปอนเซอร์ 250 มิลลิลิตร",
-          categorie: "เครื่องดื่ม",
-          price: "฿10.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 7,
-          name: "ลิปตัน เลมอนขวด 445 มิลลิลิตร",
-          categorie: "เครื่องดื่ม",
-          price: "฿20.00",
-          qty: 10,
-          reload: false,
-        },
-        {
-          id: 7,
-          name: "จับใจ สูตรจับเลี้ยง 500 มิลลิลิตร",
-          categorie: "เครื่องดื่ม",
-          price: "฿15.00",
-          qty: 10,
-          reload: false,
-        },
-      ],
+      products: [],
     };
   },
 };

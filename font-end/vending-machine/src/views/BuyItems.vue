@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import axios from "axios"
 import Product from "@/components/products/product";
 export default {
   name: "Home",
@@ -72,65 +73,18 @@ export default {
     Product,
   },
   mounted(){ 
-    this.welcome()
+    this.getProducts()
   },
   methods: { 
-    welcome(){
-      alert("Test")
-    },
+    getProducts(){
+      axios.get("http://127.0.0.1:5000/api/v1/product").then(response => {
+        this.srcProduct = response.data
+      })
+    }
   }, 
   data() {
     return {
-      srcProduct: [
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12075425/51021628_P.jpg",
-          name: "นกพิราบผักกาดดองเค็มฝาดึง 230 กรัม",
-          price: "฿32.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2018/03/06112105/51009434_P.jpg",
-          name: "ซีเล็คทูน่าสเต็กในน้ำเกลือ 165 กรัม",
-          price: "฿49.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12075341/51011628_P.jpg",
-          name: "อะยัมซาร์ดีนในซอสมะเขือเทศ 155 กรัม",
-          price: "฿36.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12075429/51021847_P.jpg",
-          name: "ยูเอฟซี เงาะในน้ำเชื่อม 565 กรัม",
-          price: "฿82.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12222505/51010586_P.jpg",
-          name: "เอ็ม-150 150 มิลลิลิตร",
-          price: "฿10.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12222438/51008429_P.jpg",
-          name: "สปอนเซอร์ 250 มิลลิลิตร",
-          price: "฿10.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12222756/51033939_P.jpg",
-          name: "ลิปตัน เลมอนขวด 445 มิลลิลิตร",
-          price: "฿20.00",
-        },
-        {
-          src:
-            "https://cpfmcdn.bygodigit.net/wp-content/uploads/2020/02/12222141/51037887_P.jpg",
-          name: "จับใจ สูตรจับเลี้ยง 500 มิลลิลิตร",
-          price: "฿15.00",
-        },
-      ],
+      srcProduct: [],
     };
   },
 };

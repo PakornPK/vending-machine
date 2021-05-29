@@ -46,12 +46,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$router.push("/admin");
-      // this.$store.dispatch({
-      //   type: "DO_LOGIN",
-      //   username: this.account.username,
-      //   password: this.account.password,
-      // });
+      // this.$router.push("/admin");
+      
     },
   },
 };

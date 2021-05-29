@@ -30,8 +30,22 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "admin",
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      axios.get("http://127.0.0.1:5000/api/v1/adimmachine").then((response) => {
+        this.machines = response.data;
+      });
+    },
+    fillProduct(item) {
+      this.$router.push(`/fillproduct/${item.id}`);
+    },
+  },
   data() {
     return {
       headers: [
@@ -46,32 +60,8 @@ export default {
         { text: "ต้องเติมสินค้า", value: "reload" },
         { text: "ดูรายละเอียด", value: "info" },
       ],
-      machines: [
-        {
-          id: 1,
-          location: "หน้าโรงงาน",
-          balance: 0,
-          reload: false,
-        },
-        {
-          id: 2,
-          location: "หน้าโรงเรียน",
-          balance: 0,
-          reload: false,
-        },
-        {
-          id: 3,
-          location: "หน้าโรงพยบาล",
-          balance: 0,
-          reload: false,
-        },
-      ],
+      machines: [],
     };
   },
-  methods: { 
-    fillProduct(item){ 
-      this.$router.push(`/fillproduct/${item.id}`)
-    }
-  }
 };
 </script>
