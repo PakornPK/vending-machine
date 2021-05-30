@@ -17,7 +17,6 @@
               v-model="account.password"
               auto-grow
               outlined
-              @click:append="isShowPassword = !isShowPassword"
             />
             <v-row class="mb-3 px-5" justify="end">
               <br />
@@ -33,11 +32,12 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "Login",
   data() {
     return {
-      isShowPassword: false,
+      res: {},
       account: {
         username: "",
         password: ""
@@ -47,7 +47,14 @@ export default {
   methods: {
     onSubmit() {
       // this.$router.push("/admin");
-      
+      axios.post('http://127.0.0.1:5000/api/v1/login',this.account).then(response => {
+        this.res = response.data
+        if(this.res.result == "Ok" ){
+          this.$router.push("/admin");
+        }else{ 
+          alert(this.res.result)
+        }
+      })
     },
   },
 };

@@ -16,7 +16,7 @@
 
           <v-card-text>
             <div>
-              <p>In Stock : 1</p>
+              <p>In Stock : {{stock}}</p>
             </div>
           </v-card-text>
 
@@ -34,7 +34,7 @@
 <script>
 export default {
   name: "product",
-  props: ["name", "src", "price"],
+  props: ["name", "src", "price","stock"],
   methods: {
     buyProduct() {
       alert("Bought");
