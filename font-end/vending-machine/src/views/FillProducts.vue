@@ -13,9 +13,8 @@
               <tr>
                 <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
-                <td>{{ item.categorie }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.qty }}</td>
+                <td>{{ item.unit_price }}</td>
+                <td>{{ item.stock }}</td>
                 <td>{{ item.reload }}</td>
                 <td>
                   <v-btn class="mr-2" color="yellow" @click="fillProduct(item)">
@@ -39,14 +38,25 @@ export default {
     this.getData()
   },
   methods: { 
+    fillProduct(item){
+      axios.post(`http://127.0.0.1:5000/api/v1/fill/${this.$route.params.mc}/${item.id}`,{}).then(response => {
+        this.res = response.data
+        if(this.res.result == "Ok" ){
+          this.getData()
+        }else{ 
+          alert(this.res.result)
+        }
+      })
+    },
     getData(){
-      axios.get("http://127.0.0.1:5000/api/v1/fillproduct").then(response => {
+      axios.get(`http://127.0.0.1:5000/api/v1/fillproduct/${this.$route.params.mc}`).then(response => {
         this.products = response.data
       })
     }
   },
   data() {
     return {
+      res: null,
       headers: [
         {
           text: "รหัสสินค้า",
@@ -55,7 +65,6 @@ export default {
           value: "id",
         },
         { text: "ชื่อสินค้า", value: "name" },
-        { text: "ประเภทสินค้า", value: "categorie" },
         { text: "ราคา", value: "price" },
         { text: "จำนวน", value: "qty" },
         { text: "ต้องเติมสินค้า", value: "reload" },

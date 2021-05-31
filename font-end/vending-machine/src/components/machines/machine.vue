@@ -29,7 +29,7 @@ export default {
   props: ["location", "src","selector"],
   methods:{ 
       goBuyItems(mc){
-          this.$router.push(`/buyitems/${mc}`)
+          this.$router.push("/buyitems/"+mc)
       }
   }
 };

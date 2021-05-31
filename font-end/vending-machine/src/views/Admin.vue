@@ -38,12 +38,12 @@ export default {
   },
   methods: {
     getData() {
-      axios.get("http://127.0.0.1:5000/api/v1/adimmachine").then((response) => {
+      axios.get("http://127.0.0.1:5000/api/v1/machine").then((response) => {
         this.machines = response.data;
       });
     },
     fillProduct(item) {
-      this.$router.push(`/fillproduct/${item.id}`);
+      this.$router.push(`/fillproduct/${item.id}`)
     },
   },
   data() {

@@ -32,12 +32,26 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "product",
-  props: ["name", "src", "price","stock"],
+  props: ["id","name", "src", "price","stock"],
   methods: {
     buyProduct() {
-      alert("Bought");
+      axios.post(`http://127.0.0.1:5000/api/v1/buy/${this.$route.params.mc}/${this.id}`,{}).then(response => {
+        this.res = response.data
+        if(this.res.result == "Ok" ){
+          alert("bought")
+          location.reload()
+        }else{ 
+          alert(this.res.result)
+        }
+      })
+    }
+  },
+  data() {
+    return { 
+      res: null
     }
   }
 };
